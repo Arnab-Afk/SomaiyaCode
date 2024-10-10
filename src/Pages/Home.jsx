@@ -1,7 +1,12 @@
 import React from "react";
+import ContestOne from "../Components/ContestOne";
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <>
+      <ContestOne />
+    </>
+  );
 };
 
 export default Home;
