@@ -23,7 +23,7 @@ function Navbar() {
           Interview Prep
         </Link>
         <Link to="/store" className=" text-base  hover:text-gray-600">
-          Store
+          Forum
         </Link>
       </div>
 
