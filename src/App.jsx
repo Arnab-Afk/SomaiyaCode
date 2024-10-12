@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Home from "./Pages/Home";
 import Problems from "./Pages/Problems";
@@ -15,24 +20,31 @@ import Profile from "./Components/Profile";
 import ClipLoader from "react-spinners/ClipLoader";
 
 function App() {
-  const { user, loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
+  // const { user, loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <ClipLoader size={150} color={"#4A90E2"} aria-label="Loading Spinner" data-testid="loader" />
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="flex items-center justify-center h-screen">
+  //       <ClipLoader
+  //         size={150}
+  //         color={"#4A90E2"}
+  //         aria-label="Loading Spinner"
+  //         data-testid="loader"
+  //       />
+  //     </div>
+  //   );
+  // }
 
-  if (!isAuthenticated) {
-    return (
-      <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-        <h1 className="text-4xl font-bold mb-4">Please Login to Access the App</h1>
-        <LoginButton />
-      </div>
-    );
-  }
+  // if (!isAuthenticated) {
+  //   return (
+  //     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+  //       <h1 className="text-4xl font-bold mb-4">
+  //         Please Login to Access the App
+  //       </h1>
+  //       <LoginButton />
+  //     </div>
+  //   );
+  // }
 
   return (
     <>

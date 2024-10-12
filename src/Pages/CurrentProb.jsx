@@ -1,5 +1,6 @@
 import React from "react";
 import CodeEditor from "../Components/CodeEditor";
+import CodeAnalyzer from "../Components/CodeAnalyzer";
 
 const CurrentProb = ({ problem }) => {
   if (!problem) {
@@ -9,22 +10,9 @@ const CurrentProb = ({ problem }) => {
   return (
     <>
       <div className="flex flex-col">
-        <div className="flex flex-row justify-center gap-5">
-          <button className="p-1 hover:bg hover:bg-gray-300 text-white pl-6 pr-6 bg-gray-400 rounded-lg">
-            Run
-          </button>
-          <button className="p-1 hover:bg hover:bg-gray-300 text-white pl-6 pr-6 bg-gray-400 rounded-lg">
-            Submit
-          </button>
-        </div>
-        <div className="flex flex-row m-10 justify-between">
-          <div className="flex flex-col bg-white shadow-sm rounded-lg p-2">
-            <div className="flex flex-row pt-6">
-              <button className="p-1 hover:bg hover:bg-gray-300 text-white pl-6 pr-6 bg-gray-400 rounded-lg">
-                Description
-              </button>
-            </div>
-            <div className="p-3 max-w-lg">
+        <div className="flex flex-col m-10  justify-between">
+          <div className="flex flex-col bg-white p-3 shadow-sm rounded-lg ">
+            <div className="p-3">
               {/* Title */}
               <h1 className="text-2xl font-bold text-gray-900 mb-2">
                 {problem.title}
@@ -51,6 +39,9 @@ const CurrentProb = ({ problem }) => {
           <div className="">
             <CodeEditor />
           </div>
+          {/* <div className="">
+            <CodeAnalyzer />
+          </div> */}
         </div>
       </div>
     </>

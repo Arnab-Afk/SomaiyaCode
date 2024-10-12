@@ -7,7 +7,7 @@ const Problems = () => {
 
   return (
     <>
-      <div className="m-10 lg:ml-32 lg:mr-32 flex flex-col ">
+      <div className="m-10 lg:ml-10 lg:mr-10 flex flex-col ">
         <ProblemTab onSelectProblem={setSelectedProblem} />
         <CurrentProb problem={selectedProblem} />
       </div>
