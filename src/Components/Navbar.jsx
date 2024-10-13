@@ -21,6 +21,9 @@ function Navbar() {
         <Link to="/interview-prep" className=" text-base hover:text-gray-600">
           Interview Prep
         </Link>
+        <Link to="/resumecheck" className=" text-base hover:text-gray-600">
+          Resume Check
+        </Link>
         {/* <Link to="/store" className=" text-base hover:text-gray-600">
           Forum
         </Link> */}
