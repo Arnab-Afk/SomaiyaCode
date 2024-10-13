@@ -37,7 +37,7 @@ const ResumeCheck = () => {
     try {
       const encodedJobDescription = encodeURIComponent(jobDescription);
       const response = await axios.post(
-        `https://resume-screening-1-koy9.onrender.com/upload_pdf?keywords=${encodedJobDescription}`, 
+        `https://resume-screening-2.onrender.com/upload_pdf?keywords=${encodedJobDescription}`, 
         formData, 
         {
           headers: {

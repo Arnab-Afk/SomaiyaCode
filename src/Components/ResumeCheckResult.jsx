@@ -3,7 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 
 const ResumeCheckResult = () => {
   const location = useLocation();
-  
+
   const { result } = location.state || {};
 
   if (!result) {
@@ -26,6 +26,7 @@ const ResumeCheckResult = () => {
       <div className="mt-6 p-4 bg-gray-100 rounded-lg">
         <h3 className="text-lg font-semibold">Summary:</h3>
         <p>{result.summary}</p>
+        <p>{result.report}</p>
       </div>
 
       <div className="text-center mt-8">
