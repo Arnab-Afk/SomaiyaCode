@@ -27,23 +27,27 @@ const ResumeCheck = () => {
       setError('Please upload a resume and enter a job description');
       return;
     }
-
+  
     setLoading(true);
     setError(null);
-
+  
     const formData = new FormData();
-    formData.append('resume', resume);
-    formData.append('jobDescription', jobDescription);
-
+    formData.append('pdf_file', resume);
+  
     try {
-      const response = await axios.post('http://localhost:8000/check-resume', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
+      const encodedJobDescription = encodeURIComponent(jobDescription);
+      const response = await axios.post(
+        `https://resume-screening-1-koy9.onrender.com/upload_pdf?keywords=${encodedJobDescription}`, 
+        formData, 
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+      
       // Navigate to the result page with the response data
-      navigate('/checkresumeresult', { state: { result: response.data } });
+      navigate('/resumecheckresult', { state: { result: response.data } });
     } catch (error) {
       console.error('Error submitting the form:', error);
       setError('There was an error processing your request. Please try again.');

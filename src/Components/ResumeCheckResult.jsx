@@ -3,6 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 
 const ResumeCheckResult = () => {
   const location = useLocation();
+  
   const { result } = location.state || {};
 
   if (!result) {
