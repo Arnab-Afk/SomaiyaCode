@@ -21,7 +21,7 @@ function CodeEditor() {
   const [userLang, setUserLang] = useState("python");
 
   // State variable to set editors default theme
-  const [userTheme, setUserTheme] = useState("vs-dark");
+  const [userTheme, setUserTheme] = useState("vs-light");
 
   // State variable to set editors default font size
   const [fontSize, setFontSize] = useState(20);
@@ -111,10 +111,10 @@ function CodeEditor() {
         setFontSize={setFontSize}
       />
       <div className="main">
-        <div className="left-container">
-          <div className="flex flex-row-reverse">
+        <div className="left-container bg-white">
+          <div className="flex flex-col items-center">
             <button
-              className="run-btn p-1 bg-green-600 rounded-xl pl-9 pr-9"
+              className="p-1 pl-4 pr-4 m-2 font-medium  bg-black/10 text-black"
               onClick={() => callApi()}
             >
               Run
@@ -122,7 +122,7 @@ function CodeEditor() {
           </div>
           <Editor
             options={options}
-            height="calc(100vh - 50px)"
+            height="calc(50vh - 50px)"
             width="100%"
             theme={userTheme}
             language={userLang}
@@ -144,16 +144,18 @@ function CodeEditor() {
           <div className="flex flex-col p-2 bg-white text-black">
             <h4 className="text-2xl">Output:</h4>
 
-            <div className="output-box">
+            <div className="bg-black/10 p-2">
               <pre>{userOutput}</pre>
-              <button
-                onClick={() => {
-                  clearOutput();
-                }}
-                className="clear-btn"
-              >
-                Clear
-              </button>
+              <div className="flex flex-row-reverse">
+                <button
+                  onClick={() => {
+                    clearOutput();
+                  }}
+                  className="p-1 pl-4  pr-4 font-medium  bg-black/10 text-black"
+                >
+                  Clear
+                </button>
+              </div>
             </div>
           </div>
         </div>
