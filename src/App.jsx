@@ -18,6 +18,7 @@ import LoginButton from "./Components/LoginButton";
 import LogoutButton from "./Components/LogoutButton";
 import Profile from "./Components/Profile";
 import ClipLoader from "react-spinners/ClipLoader";
+import CompanyDetails from "./Components/CompanyDetails";
 
 function App() {
   // const { user, loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
@@ -64,6 +65,7 @@ function App() {
             <Route path="/contest" element={<Contest />} />
             <Route path="/discuss" element={<Discuss />} />
             <Route path="/interview-prep" element={<InterviewPrep />} />
+            <Route path="/company/:name" element={<CompanyDetails />} />
             <Route path="/store" element={<Store />} />
             <Route path="/currentProb" element={<CurrentProb />} />
           </Routes>
