@@ -21,6 +21,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 import CompanyDetails from "./Components/CompanyDetails";
 import ResumeCheck from "./Pages/ResumeCheck";
 import ResumeCheckResult from "./Components/ResumeCheckResult";
+import AiInterview from "./Pages/AiInterview"
+import Assessment from "./Pages/Assessment";
 
 function App() {
   // const { user, loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
@@ -71,6 +73,8 @@ function App() {
             <Route path="/store" element={<Store />} />
             <Route path="/currentProb" element={<CurrentProb />} />
             <Route path="/resumecheck" element={<ResumeCheck />} />
+            <Route path="/aiinterview" element={<AiInterview />} />
+            <Route path="/assessment" element={<Assessment />} />
             <Route path="/resumecheckresult" element={<ResumeCheckResult />} />
           </Routes>
         </div>
