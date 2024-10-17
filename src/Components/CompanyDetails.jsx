@@ -27,8 +27,49 @@ const CompanyDetails = () => {
       pyq: "Link to Accenture Previous Year Questions",
       usefulLinks: "Useful links for Accenture Interview Preparation",
     },
+    PwC: {
+      package: "₹14 LPA",
+      conversionRate: "28%",
+      interviewRounds: 3,
+      pyq: "Link to PwC Previous Year Questions",
+      usefulLinks: "Useful links for PwC Interview Preparation",
+    },
+    EY: {
+      package: "₹13 LPA",
+      conversionRate: "32%",
+      interviewRounds: 3,
+      pyq: "Link to EY Previous Year Questions",
+      usefulLinks: "Useful links for EY Interview Preparation",
+    },
+    "McKinsey & Company": {
+      package: "₹20 LPA",
+      conversionRate: "20%",
+      interviewRounds: 5,
+      pyq: "Link to McKinsey & Company Previous Year Questions",
+      usefulLinks: "Useful links for McKinsey & Company Interview Preparation",
+    },
+    "Goldman Sachs": {
+      package: "₹22 LPA",
+      conversionRate: "18%",
+      interviewRounds: 5,
+      pyq: "Link to Goldman Sachs Previous Year Questions",
+      usefulLinks: "Useful links for Goldman Sachs Interview Preparation",
+    },
+    Amazon: {
+      package: "₹30 LPA",
+      conversionRate: "25%",
+      interviewRounds: 4,
+      pyq: "Link to Amazon Previous Year Questions",
+      usefulLinks: "Useful links for Amazon Interview Preparation",
+    },
+    Google: {
+      package: "₹40 LPA",
+      conversionRate: "15%",
+      interviewRounds: 5,
+      pyq: "Link to Google Previous Year Questions",
+      usefulLinks: "Useful links for Google Interview Preparation",
+    },
   };
-
   const company = companyData[name];
 
   if (!company) {
@@ -37,7 +78,7 @@ const CompanyDetails = () => {
 
   return (
     <>
-      <div className="max-w-5xl mx-auto p-6">
+      <div className="ml-32 mr-32 mx-auto mt-16">
         <h2 className="text-4xl font-bold mb-6">{name} Resources</h2>
         <p className="text-gray-700 mb-2">Package: {company.package}</p>
         <p className="text-gray-700 mb-2">

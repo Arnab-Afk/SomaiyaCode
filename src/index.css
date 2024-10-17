@@ -3,5 +3,20 @@
 @tailwind utilities;
 
 body {
-  background: #ededed;
+  background: white;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(450%);
+  }
+}
+
+.animate-marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 19s linear infinite;
 }

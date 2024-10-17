@@ -27,7 +27,7 @@ const ProblemTab = ({ onSelectProblem }) => {
     onSelectProblem(prob); // Pass selected problem to parent component
   };
   return (
-    <div className="p-10">
+    <div className="mt-10 flex flex-col gap-3 ml-32 mr-32">
       {/* Problem list */}
       <p>
         {" "}
@@ -36,7 +36,7 @@ const ProblemTab = ({ onSelectProblem }) => {
       <div className="overflow-x-auto">
         <table className="table-auto w-full text-left">
           <thead>
-            <tr className="bg-gray-200 text-gray-700">
+            <tr className="bg-white text-gray-700">
               <th className="px-4 py-2">Status</th>
               <th className="px-4 py-2">Title</th>
               <th className="px-4 py-2">Solution</th>

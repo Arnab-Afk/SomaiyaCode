@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "start": "nodemon src/api/server.js",
+    "cool": "nodemon src/api/Gemini.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

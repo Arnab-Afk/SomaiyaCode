@@ -21,7 +21,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import CompanyDetails from "./Components/CompanyDetails";
 import ResumeCheck from "./Pages/ResumeCheck";
 import ResumeCheckResult from "./Components/ResumeCheckResult";
-import AiInterview from "./Pages/AiInterview"
+import AiInterview from "./Pages/AiInterview";
 import Assessment from "./Pages/Assessment";
 
 function App() {
@@ -62,7 +62,7 @@ function App() {
           </div>
         </div> */}
 
-        <div className="container mx-auto py-8">
+        <div className="">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/problems" element={<Problems />} />

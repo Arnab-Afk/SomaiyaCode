@@ -60,11 +60,18 @@ const data = [
   },
 ];
 
+const companyImages = {
+  Microsoft: "ms.png", // Update with actual image paths
+  Google: "genai.jpeg", // Update with actual image paths
+  Meta: "meta.webp", // Update with actual image paths
+  Amazon: "aws.png", // Update with actual image paths
+};
+
 const HOne = () => {
   return (
     <>
-      <div className="flex flex-col gap-5">
-        <div className="flex flex-col gap-3">
+      <div className="flex flex-col mt-10 gap-5 ml-32 mr-32">
+        <div className="flex flex-col gap-4">
           <p className="font-semibold text-3xl">Upcoming Hackathons</p>
 
           {data.map((hackathon, index) => (
@@ -74,7 +81,11 @@ const HOne = () => {
             >
               <div className="flex flex-row justify-between">
                 <div className="flex flex-row gap-5">
-                  <img src="ms.png" className="h-32" alt={hackathon.company} />
+                  <img
+                    src={companyImages[hackathon.company]}
+                    className="h-32"
+                    alt={hackathon.company}
+                  />
                   <div className="flex flex-col gap-2">
                     <p className="text-2xl font-semibold">{hackathon.title}</p>
 

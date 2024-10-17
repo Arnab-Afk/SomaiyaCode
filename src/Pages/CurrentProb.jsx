@@ -9,9 +9,9 @@ const CurrentProb = ({ problem }) => {
 
   return (
     <>
-      <div className="flex flex-col">
-        <div className="flex flex-col m-10  justify-between">
-          <div className="flex flex-col bg-white p-3 shadow-sm rounded-lg ">
+      <div className="flex flex-col mt-10">
+        <div className="flex flex-col ml-32 mr-32  justify-between">
+          <div className="flex flex-col bg-white p-3 shadow-md rounded-lg ">
             <div className="p-3">
               {/* Title */}
               <h1 className="text-2xl font-bold text-gray-900 mb-2">
@@ -36,7 +36,7 @@ const CurrentProb = ({ problem }) => {
               <p className="text-gray-800">{problem.description}</p>
             </div>
           </div>
-          <div className="">
+          <div className="mt-10">
             <CodeEditor />
           </div>
           {/* <div className="">

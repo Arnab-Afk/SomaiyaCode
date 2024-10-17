@@ -6,18 +6,18 @@ import Profile from "./Profile";
 
 function Navbar() {
   return (
-    <nav className="bg-white p-4 pl-32 pr-32 flex justify-between items-center">
-      <div className="flex space-x-4">
+    <nav className="bg-white/30 backdrop-blur sticky top-0 p-4 pl-32 pr-32 shadow-sm flex justify-between items-center z-50">
+      <div className="flex flex-row gap-8">
         {/* Left Side Links */}
         <Link to="/" className=" text-base hover:text-gray-600">
           Explore
         </Link>
-        <Link to="/problems" className=" text-base hover:text-gray-600">
+        {/* <Link to="/problems" className=" text-base hover:text-gray-600">
           Problems
         </Link>
         <Link to="/discuss" className=" text-base hover:text-gray-600">
           Discuss
-        </Link>
+        </Link> */}
         <Link to="/interview-prep" className=" text-base hover:text-gray-600">
           Interview Prep
         </Link>

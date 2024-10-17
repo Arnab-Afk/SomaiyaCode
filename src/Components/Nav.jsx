@@ -23,7 +23,7 @@ const Nav = ({
   ];
 
   return (
-    <div className="bg-red-600 flex flex-row justify-between items-center p-3">
+    <div className="bg-red-600 rounded-t-md flex flex-row justify-between items-center p-3">
       <h1 className="text-2xl text-white font-[helvetica]">
         Somaiya Code Compiler
       </h1>
@@ -33,7 +33,7 @@ const Nav = ({
           value={userLang}
           onChange={(e) => setUserLang(e.value)}
           placeholder={userLang}
-          className="text-black outline-none bg"
+          className="text-black outline-none"
         />
         {/* <Select
           options={themes}

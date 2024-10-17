@@ -101,7 +101,7 @@ function CodeEditor() {
   }
 
   return (
-    <div className="">
+    <div className="border border-2  rounded-md">
       <Nav
         userLang={userLang}
         setUserLang={setUserLang}
