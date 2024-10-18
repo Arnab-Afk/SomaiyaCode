@@ -9,6 +9,10 @@
   import { GoogleAIFileManager } from "@google/generative-ai/server";
   import dotenv from "dotenv";
   import fs from "fs";
+  import fetch , { Headers } from "node-fetch"
+
+
+
 
   // Initialize environment variables
   dotenv.config();
@@ -23,6 +27,10 @@
   // Middleware
   app.use(cors());
   app.use(express.json());
+
+  global.fetch = fetch
+  global.Headers = Headers;
+
 
   // ==================== Existing /compile Route ==================== //
 
@@ -131,9 +139,7 @@
     fileFilter: fileFilter,
   });
 
-  // Initialize Google Generative AI with your API_KEY.
   const genAI = new GoogleGenerativeAI("AIzaSyAp3GK3xZNMzU3mgAw1HDlAfmkhwv0LlH0");
-  // Initialize GoogleAIFileManager with your API_KEY.
   const fileManager = new GoogleAIFileManager("AIzaSyAp3GK3xZNMzU3mgAw1HDlAfmkhwv0LlH0");
 
   // POST /check-resume
@@ -148,7 +154,6 @@
           .json({ error: "Resume file and job description are required." });
       }
 
-      // Upload the resume file to Google AI File Manager
       const uploadResponse = await fileManager.uploadFile(
         path.join(__dirname, "uploads", resumeFile.filename),
         {
@@ -166,7 +171,6 @@
         model: "gemini-1.5-flash",
       });
 
-      // Generate content using the uploaded file and job description
       const result = await model.generateContent([
         {
           fileData: {
@@ -174,15 +178,12 @@
             fileUri: uploadResponse.file.uri,
           },
         },
-        // { text: "Can you summarize this document as a bulleted list?" },
         { text: `Job Description: ${jobDescription}` },
-        { text: " The user will upload their resume, along with the job description for the position they are applying for. Your task is to perform an ATS (Applicant Tracking System) analysis to evaluate how well the user fits the job. Provide detailed feedback, including section-wise recommendations for changes—what to add and what to remove. Additionally, assign a score based on the job description and offer constructive feedback. Finally, give a definitive verdict on whether the user is ready for the job or not." },
+        { text: " To perform a comprehensive ATS (Applicant Tracking System) analysis of the user’s resume based on the provided job description, evaluate the percentage of relevant keywords, skills, and experiences that match the job requirements. Statistically compare the alignment of the user's qualifications with the key responsibilities, noting exact keyword matches, gaps, and redundancies. Offer feedback on each resume section (Summary, Skills, Experience, Education), highlighting areas to improve by adding or removing content. Provide a score based on keyword density and alignment, and give a final verdict on the user’s readiness for the job, including percentage improvements after suggested changes." },
       ]);
 
-      // Extract the generated text
       const generatedText = result.response.text();
 
-      // Optionally, delete the uploaded file after processing
       fs.unlink(path.join(__dirname, "uploads", resumeFile.filename), (err) => {
         if (err) {
           console.error("Error deleting the uploaded file:", err);
@@ -191,7 +192,6 @@
         }
       });
 
-      // Send the AI-generated result back to the client
       res.json({ summary: generatedText });
     } catch (error) {
       console.error("Error in /check-resume:", error);
@@ -199,7 +199,6 @@
     }
   });
 
-  // Helper function to check if a path exists
   function pathExists(p) {
     try {
       fs.accessSync(p, fs.constants.F_OK);
@@ -208,12 +207,6 @@
       return false;
     }
   }
-
-  // Start the server
-  app.listen(process.env.PORT || PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-  });
-
 
 
 
@@ -224,3 +217,141 @@
 
 
 //======================= Ai interview ===============================
+const model = genAI.getGenerativeModel({
+  model: "gemini-1.5-flash",
+  generationConfig: {
+    candidateCount: 1,
+    stopSequences: ["x"],
+    maxOutputTokens: 150, // Adjusted for longer responses
+    temperature: 0.7, // Adjust the creativity level as needed
+  },
+});
+
+
+
+const initialInterview = {
+  role: 'model',
+  content: `
+    You are a gender-neutral interviewer. You are interviewing a candidate for a software engineering position. You can ask questions about their skills and experience.
+    Ask one question at a time and wait for the interviewee to answer before asking the next question.
+    You can also ask the interviewee to elaborate on their answers.
+    You can ask the interviewee to describe a project they have worked on in the past.
+    You can ask the interviewee about some coding questions to check their logic-building skills.
+    Do not ask all questions at once and make it sequential. Include roles in the output.
+  `,
+};
+
+let messageInterview = {};
+let ats = {};
+
+app.post('/interview/start', async (req, res) => {
+  const id = req.body.id;
+  let messages = [];
+
+  messageInterview[id] = [
+    initialInterview,
+    {
+      role: 'user',
+      content: "Interviewee's resume" + JSON.stringify(ats),
+    },
+    {
+      role: 'model',
+      content: 'Start the interview by asking the interviewee to introduce themselves',
+    },
+  ];
+
+  messages = messageInterview[id];
+
+  try {
+    const request = {
+      contents: messages.map((msg) => ({
+        role: msg.role,
+        parts: [{ text: msg.content }],
+      })),
+    };
+
+    const result = await model.generateContentStream(request);
+
+    console.log(result.response.text()); // If the response is not in a stream, this should still work
+    res.json(result);
+
+
+
+    let responseText = '';
+    for await (const item of result.stream) {
+      responseText += item.candidates[0].content.parts[0].text;
+    }
+
+    messages.push({ role: 'model', content: responseText });
+    res.json(responseText);
+  } catch (error) {
+    console.error('Error in starting the interview:', error);
+    res.status(500).json({ error: 'Failed to start the interview' });
+  }
+});
+
+app.post('/interview/answer', async (req, res) => {
+  const msg = req.body.message;
+  const id = req.body.id;
+  const prePrompt = '';
+  const fullPrompt = prePrompt + msg;
+  let prompt = {
+    role: 'user',
+    content: fullPrompt,
+  };
+
+  let messages = [];
+  try {
+    messages = messageInterview[id];
+    messages.push(prompt);
+  } catch (e) {
+    return res.json('Interview not started');
+  }
+
+  try {
+    const request = {
+      contents: messages.map((msg) => ({
+        role: msg.role,
+        parts: [{ text: msg.content }],
+      })),
+    };
+
+    const result = await model.generateContentStream(request);
+
+    let responseText = '';
+    for await (const item of result.stream) {
+      responseText += item.candidates[0].content.parts[0].text;
+    }
+
+    messages.push({ role: 'model', content: responseText });
+    res.json(responseText);
+  } catch (error) {
+    console.error('Error in processing the interview answer:', error);
+    res.status(500).json({ error: 'Failed to process the answer' });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  app.listen(process.env.PORT || PORT, () => {
+    console.log(`Server listening on port ${PORT}`);
+  });
+
+

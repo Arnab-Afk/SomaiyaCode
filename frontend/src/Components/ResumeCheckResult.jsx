@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
 import { useState } from "react";
+
 const ResumeCheckResult = () => {
   const location = useLocation();
 
@@ -25,14 +26,12 @@ const ResumeCheckResult = () => {
 
       <div className="mt-6 p-4 gap-4 text-white  flex flex-col rounded-md">
         <div className="flex flex-row gap-4 items-start">
-          {/* Summary and Report Section */}
           <div className="flex flex-col w-[900px] gap-5">
             <div className="flex flex-col gap-2 rounded-md  bg-green-700 hover:cursor-pointer hover:p-4 transition: duration-500 p-5 ">
               <h3 className="text-3xl font-semibold">Summary:</h3>
               <p className="italic">{result.summary}</p>
             </div>
             <div className="flex flex-col gap-5">
-              {/* <h3 className="text-3xl font-semibold">Report:</h3> */}
               <div className="flex flex-col gap-2 rounded-md  bg-green-700 hover:cursor-pointer hover:p-4 transition: duration-500 p-5">
                 <p className="font-semibold ">Interpretation:</p>
 
@@ -51,7 +50,6 @@ const ResumeCheckResult = () => {
             </div>
           </div>
 
-          {/* Improvements Section */}
           <div className="hover:cursor-pointer hover:p-4 transition: duration-500 p-5 rounded-md bg-green-700 text-white shadow-sm">
             <h3 className="text-3xl font-semibold mb-4">Improvements</h3>
             <ul className="list-disc list-inside">

@@ -9,7 +9,7 @@ const AiInterview = () => {
     const { transcript } = useSpeechRecognition();
     const [state, setState] = useState(-1);
     const startInterview = () => {
-        fetch("http://localhost:4000/interview/start", {
+        fetch("http://localhost:8000/interview/start", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -25,7 +25,7 @@ const AiInterview = () => {
 
     const stop = () => {
         SpeechRecognition.stopListening();
-        fetch("http://localhost:4000/interview/answer", {
+        fetch("http://localhost:8000/interview/answer", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const AiInterview = () => {
         }
     };
     return (
-        <div className="h-screen w-screen flex items-center justify-center">
+        <div className="h-screen w-screen flex items-center justify-center bg-gray-100">
             <div className="h-80 w-80">
                 <button
                     onClick={() => {
@@ -71,28 +71,28 @@ const AiInterview = () => {
                     className={`cursor-pointer h-full w-full border-none rounded-full shadow-2xl transition duration-700 ease flex items-center justify-center
                         ${
                             state === -1
-                                ? "bg-[#571b4b] shadow-[#571b4bcb]"
+                                ? "bg-white shadow-gray-300"
                                 : state === 0
-                                ? "bg-[#f443368b] shadow-[#f443366e] backdrop-blur-3xl"
-                                : "bg-[#4caf4fc5] shadow-[#4caf4f94]"
+                                ? "bg-red-300 shadow-red-200 backdrop-blur-3xl"
+                                : "bg-green-300 shadow-green-200"
                         }
                     `}
                 >
                     {state === -1 ? (
-                        <Power color="#fff" className="h-[50%] w-[50%]" />
+                        <Power color="#c53030" className="h-[50%] w-[50%]" />
                     ) : state === 0 ? (
-                        <Mic color="#fff" className="h-[50%] w-[50%]" />
+                        <Mic color="#f44336" className="h-[50%] w-[50%]" />
                     ) : (
                         <div className="h-[50%] w-[50%] flex items-center justify-center">
-                            <div className="h-5 w-5 bg-white rounded-full animate-ping mx-3"></div>
-                            <div className="h-5 w-5 bg-white rounded-full animate-ping mx-3"></div>
-                            <div className="h-5 w-5 bg-white rounded-full animate-ping mx-3"></div>
+                            <div className="h-5 w-5 bg-blue-500 rounded-full animate-ping mx-3"></div>
+                            <div className="h-5 w-5 bg-blue-500 rounded-full animate-ping mx-3"></div>
+                            <div className="h-5 w-5 bg-blue-500 rounded-full animate-ping mx-3"></div>
                         </div>
                     )}
                 </button>
             </div>
-            <div className="absolute w-36 h-24 bg-[#380e2e] right-32 top-28 rounded-xl flex flex-col items-center justify-around">
-                <p className="text-white text-center text-xs font-semibold p-0 m-0">
+            <div className="absolute w-36 h-24 bg-red-200 right-32 top-28 rounded-xl flex flex-col items-center justify-around shadow-md">
+                <p className="text-black text-center text-xs font-semibold p-0 m-0">
                     {state === -1 ? "Start Interview" : "Interview in progress"}
                 </p>
                 <h1 className="p-0 m-0">{`${Math.floor(time / 60)}:${

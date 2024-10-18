@@ -11,7 +11,7 @@ const Assessment = () => {
     const { transcript } = useSpeechRecognition();
     const [state, setState] = useState(-1);
     const startInterview = () => {
-        fetch("http://localhost:4000/interview/start", {
+        fetch("http://localhost:8000/interview/start", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -26,7 +26,7 @@ const Assessment = () => {
     let [time, setTime] = useState(0);
     const stop = () => {
         SpeechRecognition.stopListening();
-        fetch("http://localhost:4000/interview/answer", {
+        fetch("http://localhost:8000/interview/answer", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const Assessment = () => {
             <section className="resume-bg"></section>
             <button
                 onClick={() => {
-                    navigate("/profile");
+                    navigate("/");
                 }}
                 className="z-10 absolute top-[6%] right-[10%] middle none rounded-lg bg-[#1F243E] py-2 px-6 text-center align-middle font-sans text-[1.05rem] font-bold border-[#3A4065] text-white transition-all focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none cursor-pointer"
                 data-ripple-light="true"
@@ -90,14 +90,14 @@ const Assessment = () => {
                     `}
                     >
                         {state === -1 ? (
-                            <Power color="#fff" className="h-[75%] w-[75%]" />
+                            <Power color="#0a1b5a" className="h-[75%] w-[75%]" />
                         ) : state === 0 ? (
-                            <Mic color="#fff" className="h-[75%] w-[75%]" />
+                            <Mic color="#0a1b5a" className="h-[75%] w-[75%]" />
                         ) : (
                             <div className="h-[75%] w-[75%] flex items-center justify-center">
-                                <div className="h-2 w-2 bg-white rounded-full animate-ping"></div>
-                                <div className="h-2 w-2 bg-white rounded-full animate-ping"></div>
-                                <div className="h-2 w-2 bg-white rounded-full animate-ping"></div>
+                                <div className="h-2 w-2 bg-blue rounded-full animate-ping"></div>
+                                <div className="h-2 w-2 bg-blue rounded-full animate-ping"></div>
+                                <div className="h-2 w-2 bg-blue rounded-full animate-ping"></div>
                             </div>
                         )}
                     </button>

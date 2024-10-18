@@ -9,7 +9,7 @@ const BannerOne = () => {
       >
         <div className="flex flex-col items-center justify-center h-full text-center">
           <h1 className="text-5xl font-extrabold mb-4">
-            Make Your Development Career a Reality
+            Make Your Coding Career a Reality
           </h1>
           <p className="text-xl font-light mb-8">
             Join the best platform to grow your skills and advance in the tech
