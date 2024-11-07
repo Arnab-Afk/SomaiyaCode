@@ -1,6 +1,21 @@
 import React from "react";
-
+import axios from "axios";
 const Bann = () => {
+  const userData = localStorage.getItem("result");
+  if (!userData) {
+    window.location.href = "/resumecheck";
+  }
+  const handleClick = async () => {
+   
+    const reponse = await axios.post("https://resume-screening-3.onrender.com/inter", {
+      prompt: userData,
+    });
+    console.log(reponse.data.questions);
+    const questions = reponse.data.questions;
+    localStorage.setItem("questions", JSON.stringify(questions));
+    window.location.href = "/interview-questions";
+  };
+  
   return (
     <>
       <div
@@ -18,6 +33,11 @@ const Bann = () => {
               Get Started
             </button>
           </a>
+          
+            <button onClick={handleClick}className="outline-none bg-transparent border-white p-3 pl-8 pr-8 border-2 rounded-md transition: duration-500 hover:bg-white hover:text-black">
+              AI Interview Questions
+            </button>
+          
         </div>
       </div>
     </>

@@ -36,14 +36,14 @@ const ResumeCheckResult = () => {
                 <p className="font-semibold ">Interpretation:</p>
 
                 <p className="italic leading-tight">
-                  {result.report.interpretation}
+                  {result.interpretation}
                 </p>
               </div>
               <div className="flex flex-col rounded-md  bg-green-700 hover:cursor-pointer hover:p-4 transition: duration-500 p-5">
                 <p className="text-white">
                   Overall Score:{" "}
                   <span className="font-semibold">
-                    {result.report.overallScore}
+                    {result.overall_score}
                   </span>{" "}
                 </p>
               </div>

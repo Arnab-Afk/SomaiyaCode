@@ -23,6 +23,8 @@ import ResumeCheck from "./Pages/ResumeCheck";
 import ResumeCheckResult from "./Components/ResumeCheckResult";
 import AiInterview from "./Pages/AiInterview";
 import Assessment from "./Pages/Assessment";
+import Callback from "./Components/Callback";
+import InterviewQuestions from "./Components/InterviewQuestions";
 
 function App() {
   const { user, loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
@@ -40,16 +42,16 @@ function App() {
     );
   }
 
-  if (!isAuthenticated) {
-    return (
-      <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-        <h1 className="text-4xl font-bold mb-4">
-          Please Login to Access the App
-        </h1>
-        <LoginButton />
-      </div>
-    );
-  }
+  // if (!isAuthenticated) {
+  //   return (
+  //     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+  //       <h1 className="text-4xl font-bold mb-4">
+  //         Please Login to Access the App
+  //       </h1>
+  //       <LoginButton />
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
@@ -59,10 +61,12 @@ function App() {
         <div className="">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/callback" element={<Callback/>} />
             <Route path="/problems" element={<Problems />} />
             <Route path="/contest" element={<Contest />} />
             <Route path="/discuss" element={<Discuss />} />
             <Route path="/interview-prep" element={<InterviewPrep />} />
+            <Route path="/interview-questions" element={<InterviewQuestions />} />
             <Route path="/company/:name" element={<CompanyDetails />} />
             <Route path="/store" element={<Store />} />
             <Route path="/currentProb" element={<CurrentProb />} />

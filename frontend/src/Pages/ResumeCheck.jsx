@@ -45,9 +45,11 @@ const ResumeCheck = () => {
           },
         }
       );
+      localStorage.setItem('result', JSON.stringify(response.data));
       
       // Navigate to the result page with the response data
       navigate('/resumecheckresult', { state: { result: response.data } });
+
     } catch (error) {
       console.error('Error submitting the form:', error);
       setError('There was an error processing your request. Please try again.');
