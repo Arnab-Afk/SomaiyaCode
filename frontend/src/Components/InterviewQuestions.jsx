@@ -19,6 +19,20 @@ const InterviewQuestions = () => {
     }
     setQuestions(storedQuestions.slice(0, 5));
   }, []);
+  const handleEvaluation = async () => {
+    const response = await fetch('https://resume-screening-3.onrender.com/evaluate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            questions,
+            transcript,
+            }),
+            });
+            const data = await response.json();
+            console.log(data);
+        };
 
   const startRecording = async () => {
     try {
@@ -143,7 +157,7 @@ const InterviewQuestions = () => {
             </button>
           ) : (
             <button
-              onClick={() => alert('Evaluating answers...')}
+              onClick={handleEvaluation}
               className="bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600"
             >
               Submit for Evaluation
