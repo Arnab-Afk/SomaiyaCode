@@ -6,6 +6,8 @@ const InterviewQuestions = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
   const [transcript, setTranscript] = useState('');
+  let [answer, setAnswers] = useState("");
+  let [answers, setAnswerss] = useState([]);
   const [score, setScore] = useState(null);
   const videoRef = useRef(null);
   const audioStreamRef = useRef(null);
@@ -20,18 +22,24 @@ const InterviewQuestions = () => {
     setQuestions(storedQuestions.slice(0, 5));
   }, []);
   const handleEvaluation = async () => {
+    console.log(questions);
+    console.log(transcript); 
+    const quesString=JSON.stringify(questions);
+    console.log(quesString);
     const response = await fetch('https://resume-screening-3.onrender.com/evaluate', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            questions,
-            transcript,
+            questions:quesString,
+            transcript: transcript,
             }),
             });
             const data = await response.json();
             console.log(data);
+            localStorage.setItem('interviewAnswer', JSON.stringify(data));
+            window.location.href = '/evaluation';
         };
 
   const startRecording = async () => {
@@ -70,6 +78,11 @@ const InterviewQuestions = () => {
     recognition.lang = 'en-US';
 
     recognition.onresult = (event) => {
+      //store the last result
+      console.log(currentQuestionIndex);
+      setAnswers(event.results[event.results.length - 1][0].transcript);
+    //   answer = event.results[event.results.length - 1][0].transcript;
+      console.log(answer);
       const transcriptText = Array.from(event.results)
         .map((result) => result[0].transcript)
         .join('');
@@ -82,6 +95,13 @@ const InterviewQuestions = () => {
 
     recognition.start();
   };
+  const addAnswersToList = (answer , index) => {
+    //set the answer at the given index in the answers array
+    const newAnswers = [...answers];
+    newAnswers[index] = answer;
+    setAnswerss(newAnswers);
+    localStorage.setItem('interviewAnswers', JSON.stringify(answers));
+    };
 
   const stopTranscription = () => {
     if (recognitionRef.current) {
@@ -93,6 +113,10 @@ const InterviewQuestions = () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setTranscript('');
+      console.log(answer);
+        addAnswersToList(answer, currentQuestionIndex);  
+        console.log(answers);
+        localStorage.setItem('interviewAnswers', JSON.stringify(answers));
     } else {
       alert('You have answered all questions.');
     }
