@@ -85,7 +85,7 @@ const InterviewQuestions = () => {
       console.log(answer);
       const transcriptText = Array.from(event.results)
         .map((result) => result[0].transcript)
-        .join('');
+        .join(', ');
       setTranscript(transcriptText);
     };
 
