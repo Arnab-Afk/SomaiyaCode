@@ -25,6 +25,7 @@ import AiInterview from "./Pages/AiInterview";
 import Assessment from "./Pages/Assessment";
 import Callback from "./Components/Callback";
 import InterviewQuestions from "./Components/InterviewQuestions";
+import Evaluation from "./Pages/Evaluation";
 
 function App() {
   const { user, loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
@@ -73,6 +74,7 @@ function App() {
             <Route path="/resumecheck" element={<ResumeCheck />} />
             <Route path="/aiinterview" element={<AiInterview />} />
             <Route path="/assessment" element={<Assessment />} />
+            <Route path="/evaluation" element={<Evaluation />} />
             <Route path="/resumecheckresult" element={<ResumeCheckResult />} />
           </Routes>
         </div>

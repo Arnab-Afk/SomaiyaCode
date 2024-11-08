@@ -53,7 +53,7 @@ const ResumeCheckResult = () => {
           <div className="hover:cursor-pointer hover:p-4 transition: duration-500 p-5 rounded-md bg-green-700 text-white shadow-sm">
             <h3 className="text-3xl font-semibold mb-4">Improvements</h3>
             <ul className="list-disc list-inside">
-              {result.improvement.map((item, index) => (
+              {result.improvement?.map((item, index) => (
                 <li key={index} className="mb-2">
                   {item}
                 </li>
@@ -65,7 +65,7 @@ const ResumeCheckResult = () => {
         <div className="p-5 hover:cursor-pointer hover:p-4 transition: duration-500  bg-green-700 rounded-md">
           <h3 className="text-lg font-semibold mb-4">Feedback</h3>
           <ul className="list-disc list-inside">
-            {result.overallview.map((point, index) => (
+            {result.overallview?.map((point, index) => (
               <li key={index} className="mb-2">
                 {point}
               </li>
